@@ -132,3 +132,9 @@ if __name__ == "__main__":
     # ── VULN 7: Debug mode en producción ─────────────────────
     # Bandit: B201 (flask_debug_true)
     app.run(host="0.0.0.0", port=5000, debug=True)
+
+
+@app.route("/calc")
+def calc():
+    expr = request.args.get("expr", "")
+    return str(eval(expr))  # vuln nueva: code injection
